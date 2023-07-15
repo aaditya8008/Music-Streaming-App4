@@ -20,23 +20,26 @@ class SongCard extends StatelessWidget {
       margin: const EdgeInsets.only(right: 10),
       child: Stack(
         alignment: Alignment.bottomCenter,
-        children:[ Container(
-          width:MediaQuery.of(context).size.width*0.45 ,
-          decoration: BoxDecoration(
-            borderRadius:BorderRadius.circular(15.0) ,
-            image: DecorationImage(
-              image: AssetImage(songlist.coverUrl),
-              fit: BoxFit.cover,
+        children:[ InkWell(
+          onTap:(){Get.toNamed('/song',arguments: songlist);} ,
+          child: Container(
+            width:MediaQuery.of(context).size.width*0.45 ,
+            decoration: BoxDecoration(
+              borderRadius:BorderRadius.circular(15.0) ,
+              image: DecorationImage(
+                image: AssetImage(songlist.coverUrl),
+                fit: BoxFit.cover,
+
+              ),
+
 
             ),
 
 
           ),
-
-
         ),
           InkWell(
-
+onTap:(){Get.toNamed('/song',arguments: songlist);} ,
             child: Container(
               height:50,
               width:MediaQuery.of(context).size.width*0.43,

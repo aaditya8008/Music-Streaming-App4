@@ -88,68 +88,73 @@ child: Scaffold(
         SizedBox(
           height: MediaQuery.of(context).size.height*0.40,
           child: ListView.builder(itemBuilder: (context,index){
-            return Container(
+            return InkWell(
+              onTap: (){
+                Get.toNamed('\song',arguments:songlist );
+              },
+              child: Container(
 
-              height:60,
-              width:MediaQuery.of(context).size.width*0.40,
-              margin:const EdgeInsets.only(bottom:10),
+                height:60,
+                width:MediaQuery.of(context).size.width*0.40,
+                margin:const EdgeInsets.only(bottom:10),
 
-              decoration: BoxDecoration(
-                  borderRadius:BorderRadius.circular(15.0) ,
-                  color: Colors.blueGrey.shade900.withOpacity(0.8),
-                  gradient:LinearGradient(colors: [Colors.blue.shade800.withAlpha(35).withOpacity(0.5),Colors.blue.shade800.withAlpha(35).withOpacity(0.5),Colors.purple.shade600.withAlpha(40).withOpacity(0.3)],)
-                  ,backgroundBlendMode: BlendMode.darken
-              ), child: Padding(
+                decoration: BoxDecoration(
+                    borderRadius:BorderRadius.circular(15.0) ,
+                    color: Colors.blueGrey.shade900.withOpacity(0.8),
+                    gradient:LinearGradient(colors: [Colors.blue.shade800.withAlpha(35).withOpacity(0.5),Colors.blue.shade800.withAlpha(35).withOpacity(0.5),Colors.purple.shade600.withAlpha(40).withOpacity(0.3)],)
+                    ,backgroundBlendMode: BlendMode.darken
+                ), child: Padding(
 
-              padding: const EdgeInsets.fromLTRB(3,8,8,3),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CircleAvatar(backgroundImage:AssetImage( songlist[index].coverUrl,),radius: 25,)
-                  ,Column(
-                    children: [
-                      Text(songlist[index].title,style: TextStyle(
+                padding: const EdgeInsets.fromLTRB(3,8,8,3),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CircleAvatar(backgroundImage:AssetImage( songlist[index].coverUrl,),radius: 25,)
+                    ,Column(
+                      children: [
+                        Text(songlist[index].title,style: TextStyle(
 
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold
+
+                        ),),
+
+                        Text(songlist[index].description,style: TextStyle(
                           color: Colors.white,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold
+                          fontSize: 12,
+                        ),),
+                      ],
 
-                      ),),
+                    ),
+                    Row(
+                      children: [
+                        TextButton(onPressed: (){
+                          setState(() {
+                            if(index==songlist.length-1){
+                              x=null;
+                            }
+                            else {
+                              x=Icons.delete_sweep;
+                              Song.play.remove(songlist[index]);
+                            }
 
-                      Text(songlist[index].description,style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                      ),),
-                    ],
+                          });
 
-                  ),
-                  Row(
-                    children: [
-                      TextButton(onPressed: (){
-                        setState(() {
-                          if(index==songlist.length-1){
-                            x=null;
-                          }
-                          else {
-                            x=Icons.delete_sweep;
-                            Song.play.remove(songlist[index]);
-                          }
+                        }, child: Icon(x,color: Colors.white,size: 30,)),
+                        TextButton(onPressed: (){
+                          setState(() {
+                            Get.toNamed('/song',arguments:  songlist[index]);
+                          });
 
-                        });
+                        }, child: Icon(Icons.play_arrow_rounded,color: Colors.white,size: 20,)),
+                      ],
+                    )
 
-                      }, child: Icon(x,color: Colors.white,size: 30,)),
-                      TextButton(onPressed: (){
-                        setState(() {
-                          Get.toNamed('/song',arguments:  songlist[index]);
-                        });
-
-                      }, child: Icon(Icons.play_arrow_rounded,color: Colors.white,size: 20,)),
-                    ],
-                  )
-
-                ],
+                  ],
+                ),
               ),
-            ),
+              ),
             );
 
 

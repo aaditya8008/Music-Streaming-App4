@@ -76,7 +76,7 @@ backgroundColor: Colors.transparent,
                       textStyle: const TextStyle(fontSize: 500)),
                     onPressed: (){
                     onTap(2);
-                  }, child: CircleAvatar(backgroundImage: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJCsloaZ5KELcnt7DHHHVcoEuaUuR05B7XdpfRAKLUrz8C5d7aI67hEo1Pjs74hylGqdo&usqp=CAU',
+                  }, child: CircleAvatar(backgroundImage: AssetImage('assets/images/img.png',
 
                   ),
                     radius: 300,),)
@@ -153,10 +153,12 @@ backgroundColor: Colors.transparent,
 
                             child: ListView.builder(itemBuilder: (context,index){
 
-                              return Container(
-                                  height:55,
-                                  width:MediaQuery.of(context).size.width*0.40,
-                                margin:const EdgeInsets.only(bottom:10),
+                              return InkWell(
+                                onTap:(){Get.toNamed('/song',arguments: songlist[index]);} ,
+                                child: Container(
+                                    height:55,
+                                    width:MediaQuery.of(context).size.width*0.40,
+                                  margin:const EdgeInsets.only(bottom:10),
 
     decoration: BoxDecoration(
     borderRadius:BorderRadius.circular(15.0) ,
@@ -164,43 +166,44 @@ backgroundColor: Colors.transparent,
  gradient:LinearGradient(colors: [Colors.blue.shade800.withAlpha(35).withOpacity(0.5),Colors.blue.shade800.withAlpha(35).withOpacity(0.5),Colors.purple.shade600.withAlpha(40).withOpacity(0.3)],)
 ,backgroundBlendMode: BlendMode.darken
     ),
-                                child: Padding(
+                                  child: Padding(
 
-                                  padding: const EdgeInsets.fromLTRB(3,8,8,3),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                     CircleAvatar(backgroundImage:AssetImage( songlist[index].coverUrl,),radius: 25,)
-                                      ,Column(
-                                        children: [
-                                          Text(songlist[index].title,style: TextStyle(
+                                    padding: const EdgeInsets.fromLTRB(3,8,8,3),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                       CircleAvatar(backgroundImage:AssetImage( songlist[index].coverUrl,),radius: 25,)
+                                        ,Column(
+                                          children: [
+                                            Text(songlist[index].title,style: TextStyle(
 
+                                                color: Colors.white,
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.bold
+
+                                            ),),
+
+                                            Text(songlist[index].description,style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.bold
+                                              fontSize: 12,
+                                            ),),
+                                          ],
 
-                                          ),),
+                                        ),
+                                        TextButton(onPressed: (){
+                                          setState(() {
+                                            Get.toNamed('/song',arguments:  songlist[index]);
+                                          });
 
-                                          Text(songlist[index].description,style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                          ),),
-                                        ],
+                                        }, child: Icon(Icons.play_arrow_rounded,color: Colors.white,size: 20,)),
 
-                                      ),
-                                      TextButton(onPressed: (){
-                                        setState(() {
-                                          Get.toNamed('/song',arguments:  songlist[index]);
-                                        });
-
-                                      }, child: Icon(Icons.play_arrow_rounded,color: Colors.white,size: 20,)),
-
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
 
 
-    );}, scrollDirection: Axis.vertical,physics: ScrollPhysics(),itemCount: songlist.length,shrinkWrap: true,
+    ),
+                              );}, scrollDirection: Axis.vertical,physics: ScrollPhysics(),itemCount: songlist.length,shrinkWrap: true,
 
                             ),
                           )

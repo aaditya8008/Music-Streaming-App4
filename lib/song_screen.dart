@@ -25,6 +25,7 @@ class _SongScreenState extends State<SongScreen> {
   Song song=Get.arguments??Song.songs[0];
 dynamic x;
 int count=0;
+
   @override
 
   void initState(){
